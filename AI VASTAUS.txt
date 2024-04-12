@@ -1,0 +1,13 @@
+Your basic server setup looks good for now. However, you'll likely need to add more to it as you develop your application. Here are a few things you might need to add:
+
+Routes: Right now, you only have a single route (/) that sends back a static string. You'll need to add more routes to handle actions like fetching currency data, updating currency data, etc.
+
+Controllers: These are functions that handle requests at each route. For example, you might have a getCurrencies controller for a /currencies GET route.
+
+Models: These are Mongoose models that define the schema for your currency data in MongoDB.
+
+Error Handling: You'll want to add some error handling middleware to catch and respond to any errors that occur in your route handlers.
+
+Environment Variables: Make sure to set up your environment variables properly in your deployment environment.
+
+You can start working on the client side now if you want, but keep in mind that you'll need to come back to the server side to add these things as you figure out the needs of your application.
