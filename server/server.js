@@ -13,34 +13,15 @@ app.use(express.json());
 app.use("/",express.static("public"));
 
 // Connect to MongoDB
-const mongo_url = process.env.MONGODB_URL;
+//const mongo_url = process.env.MONGODB_URL;
 const mongo_user = process.env.MONGODB_USER;
 const mongo_password = process.env.MONGODB_PASSWORD;
 
-const url = "mongodb+srv://"+mongo_user+":"+mongo_password+"@"+mongo_url+"test?retryWrites=true&w=majority&appName=testi";
+const url = "mongodb+srv://"+mongo_user+":"+mongo_password+"@testi.17wvver.mongodb.net/test?retryWrites=true&w=majority&appName=testi";
 
 mongoose.connect(url)
   .then(() => console.log('MongoDB connection successful'))
   .catch((err) => console.error('MongoDB connection error:', err));
-
-/*Remove duplicates from the rates collection
-Rate.aggregate([
-  {
-    $group: {
-      _id: { code: "$code", date: "$date" },
-      doc: { $first: "$$ROOT" }
-    }
-  },
-  {
-    $replaceRoot: { newRoot: "$doc" }
-  },
-  {
-    $out: "rates"
-  }
-])
-.then(() => console.log('Removed duplicates from the rates collection'))
-.catch(err => console.error('Error removing duplicates:', err));
-*/
 
 // Routes
 app.get('/', (req, res) => {
