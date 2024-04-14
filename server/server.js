@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const axios = require('axios');
 const Rate = require('./models/Rate');
+const path = require('path');
 
 // Create Express server
 const app = express();
