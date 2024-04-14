@@ -25,7 +25,7 @@ mongoose.connect(url)
 
 // Routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, './public/index.html'));
 })
 
 app.get('/rates', (req, res) => {
