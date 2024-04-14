@@ -13,7 +13,6 @@ app.use(express.json());
 app.use("/",express.static("public"));
 
 // Connect to MongoDB
-//const mongo_url = process.env.MONGODB_URL;
 const mongo_user = process.env.MONGODB_USER;
 const mongo_password = process.env.MONGODB_PASSWORD;
 
@@ -24,9 +23,9 @@ mongoose.connect(url)
   .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
-app.get('/', (req, res) => {
-  res.send('Currency Exchange API');
-});
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+})
 
 app.get('/rates', (req, res) => {
   axios.get('https://www.floatrates.com/daily/eur.json')
