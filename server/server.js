@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const axios = require('axios');
+const Rate = require('./models/Rate');
 
 // Create Express server
 const app = express();
@@ -22,14 +23,48 @@ mongoose.connect(url)
   .then(() => console.log('MongoDB connection successful'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
+/*Remove duplicates from the rates collection
+Rate.aggregate([
+  {
+    $group: {
+      _id: { code: "$code", date: "$date" },
+      doc: { $first: "$$ROOT" }
+    }
+  },
+  {
+    $replaceRoot: { newRoot: "$doc" }
+  },
+  {
+    $out: "rates"
+  }
+])
+.then(() => console.log('Removed duplicates from the rates collection'))
+.catch(err => console.error('Error removing duplicates:', err));
+*/
+
 // Routes
 app.get('/', (req, res) => {
   res.send('Currency Exchange API');
 });
 
 app.get('/rates', (req, res) => {
-  axios.get('https://www.floatrates.com/daily/usd.json')
+  axios.get('https://www.floatrates.com/daily/eur.json')
     .then(response => {
+      // For each rate, check if it already exists in the database
+      // If it doesn't exist, create a new document and insert it into the database
+      Object.values(response.data).forEach(rate => {
+        Rate.findOne({ code: rate.code, date: rate.date })
+          .then(existingRate => {
+            if (!existingRate) {
+              const newRate = new Rate(rate);
+              newRate.save()
+                .then(() => console.log('Inserted rate into the database'))
+                .catch(err => console.error('Error inserting rate:', err));
+            }
+          })
+          .catch(err => console.error('Error finding rate:', err));
+      });
+
       res.send(response.data);
     })
     .catch(error => {
