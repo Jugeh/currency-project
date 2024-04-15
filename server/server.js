@@ -11,7 +11,7 @@ const app = express();
 // Use middleware
 app.use(cors());
 app.use(express.json());
-app.use("/",express.static(path.join(__dirname, 'currency_project', 'dist')));
+app.use("/",express.static(path.join(__dirname, 'client', 'currency_project', 'dist')));
 
 // Connect to MongoDB
 const mongo_user = process.env.MONGODB_USER;
@@ -25,7 +25,7 @@ mongoose.connect(url)
 
 // Routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'currency_project', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'client', 'currency_project', 'dist', 'index.html'));
 })
 
 app.get('/rates', (req, res) => {
