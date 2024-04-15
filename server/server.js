@@ -4,7 +4,6 @@ const cors = require('cors');
 const axios = require('axios');
 const Rate = require('./models/Rate');
 const path = require('path');
-import { promises as fs } from "fs";
 
 // Create Express server
 const app = express();
