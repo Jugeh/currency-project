@@ -11,7 +11,7 @@ const app = express();
 // Use middleware
 app.use(cors());
 app.use(express.json());
-app.use("/",express.static(path.join(__dirname, '..', 'client', 'currency_project', 'dist')));
+app.use("/",express.static(path.join(__dirname, 'client', 'currency_project', 'dist')));
 
 // Connect to MongoDB
 const mongo_user = process.env.MONGODB_USER;
@@ -51,7 +51,7 @@ app.get('/rates', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  const filePath = path.join(__dirname, '..', 'client', 'currency_project', 'dist', 'index.html');
+  const filePath = path.join(__dirname, 'client', 'currency_project', 'dist', 'index.html');
   console.log(`Trying to send file: ${filePath}`);
   res.sendFile(filePath);
 })
