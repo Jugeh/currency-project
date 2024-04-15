@@ -25,9 +25,10 @@ mongoose.connect(url)
 
 // Routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', '..', 'client', 'currency_project', 'dist', 'index.html'));
+  const filePath = path.join(__dirname, '..', '..', 'client', 'currency_project', 'dist', 'index.html');
+  console.log(`Trying to send file: ${filePath}`);
+  res.sendFile(filePath);
 })
-
 app.get('/rates', (req, res) => {
   axios.get('https://www.floatrates.com/daily/eur.json')
     .then(response => {
