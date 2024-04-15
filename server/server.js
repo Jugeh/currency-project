@@ -24,11 +24,6 @@ mongoose.connect(url)
   .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
-app.get('*', (req, res) => {
-  const filePath = path.join(__dirname, '..', 'client', 'currency_project', 'dist', 'index.html');
-  console.log(`Trying to send file: ${filePath}`);
-  res.sendFile(filePath);
-})
 app.get('/rates', (req, res) => {
   axios.get('https://www.floatrates.com/daily/eur.json')
     .then(response => {
@@ -54,6 +49,12 @@ app.get('/rates', (req, res) => {
       res.status(500).send('Error fetching exchange rates');
     });
 });
+
+app.get('*', (req, res) => {
+  const filePath = path.join(__dirname, '..', 'client', 'currency_project', 'dist', 'index.html');
+  console.log(`Trying to send file: ${filePath}`);
+  res.sendFile(filePath);
+})
 
 // Start the server
 const PORT = process.env.PORT || 5000;
