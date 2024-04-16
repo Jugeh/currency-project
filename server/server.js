@@ -51,10 +51,9 @@ app.get('/rates', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  const filePath = path.join(__dirname, "../client/currency_project/dist/index.html");
-  console.log(`Trying to send file: ${filePath}`);
+  const filePath = path.join(__dirname, '..', 'client', 'currency_project', 'dist', 'index.html');
   res.sendFile(filePath);
-})
+});
 
 // Start the server
 const PORT = process.env.PORT || 5000;
