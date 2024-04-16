@@ -56,9 +56,8 @@ app.get('/rates', (req, res) => {
     });
 });
 
+// Catch-all route
 app.get('*', (req, res) => {
-  console.log(`Current directory: ${process.cwd()}`);
-  const filePath = path.join(process.cwd(), 'client', 'currencyproject', 'dist', 'index.html');
-  console.log(`File path: ${filePath}`);
+  const filePath = path.join(process.cwd(), '..', 'client', 'currencyproject', 'dist', 'index.html');
   res.sendFile(filePath);
 });
