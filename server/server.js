@@ -20,7 +20,13 @@ const mongo_password = process.env.MONGODB_PASSWORD;
 const url = "mongodb+srv://"+mongo_user+":"+mongo_password+"@testi.17wvver.mongodb.net/test?retryWrites=true&w=majority&appName=testi";
 
 mongoose.connect(url)
-  .then(() => console.log('MongoDB connection successful'))
+  .then(() => {
+    console.log('MongoDB connection successful');
+    
+    // Start the server after the database connection is established
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+  })
   .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
@@ -56,7 +62,3 @@ app.get('*', (req, res) => {
   console.log(`File path: ${filePath}`);
   res.sendFile(filePath);
 });
-
-// Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
