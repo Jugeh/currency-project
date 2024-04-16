@@ -11,7 +11,7 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(process.cwd(), 'client', 'currencyproject', 'dist')));
+app.use("/",express.static(path.join(process.cwd(), 'client', 'currencyproject', 'dist')));
 
 // Connect to MongoDB
 const mongo_user = process.env.MONGODB_USER;
