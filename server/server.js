@@ -52,7 +52,7 @@ app.get('/rates', (req, res) => {
 
 app.get('*', (req, res) => {
   console.log(`Current directory: ${process.cwd()}`);
-  const filePath = path.join(process.cwd(), '..', 'client', 'currency_project', 'dist', 'index.html');
+  const filePath = path.join(process.cwd(), 'client', 'currency_project', 'dist', 'index.html');
   console.log(`File path: ${filePath}`);
   res.sendFile(filePath);
 });
