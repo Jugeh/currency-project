@@ -1,1 +1,3 @@
-Here you can see the app: https://valuuttasetit.cyclic.app/
+Site (not working yet): https://valuuttasetit.cyclic.app/
+
+To Do: valuuttamuunnin, viikon data per valuutta graph, dark mode
